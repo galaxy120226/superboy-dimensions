@@ -1,0 +1,307 @@
+<head>
+	<script src="break_eternity.js"></script>
+	<script src="NumberFormating.js"></script>
+<title>我是傻逼</title>
+<meta charset="utf8" />
+<style>
+	body-text{
+		font-size:25px
+	}
+	button{
+		height:30px;
+		background-color:white;
+		font-size:15px;
+	}
+	.dim {
+		display: grid;
+		place-items:center;
+		grid-template-columns: 50px 80px 100px 50px 80px 75px 75px 80px 60px;
+	}
+</style>
+</head>
+<body>
+<div><h2>你有<span id="sbpower">0</span>sb力量</h2></div>
+<button onclick="getSBpower()">变得SB</button>
+<!--sb维度-->
+<div>
+	<div class="dim">
+		<div>你有</div>
+		<div><span id="sbd1">0</span></div>
+		<div>第一sb维度</div>
+		<div>价格:</div>
+		<div><span id="sbc1">0</span></div>
+		<div>sb力量</div>
+		<div>乘数:x</div>
+		<div><span id="sbm1">1</span></div>
+		<div><button class="button" onclick="buysb(1)">购买</button></div>
+	</div>
+	<div class="dim">
+		<div>你有</div>
+		<div><span id="sbd2">0</span></div>
+		<div>第二sb维度</div>
+		<div>价格:</div>
+		<div><span id="sbc2">0</span></div>
+		<div>sb力量</div>
+		<div>乘数:x</div>
+		<div><span id="sbm2">1</span></div>
+		<div><button class="button" onclick="buysb(2)">购买</button></div>
+	</div>
+	<div class="dim">
+		<div>你有</div>
+		<div><span id="sbd3">0</span></div>
+		<div>第三sb维度</div>
+		<div>价格:</div>
+		<div><span id="sbc3">0</span></div>
+		<div>sb力量</div>
+		<div>乘数:x</div>
+		<div><span id="sbm3">1</span></div>
+		<div><button class="button" onclick="buysb(3)">购买</button></div>
+	</div>
+	<div class="dim">
+		<div>你有</div>
+		<div><span id="sbd4">0</span></div>
+		<div>第四sb维度</div>
+		<div>价格:</div>
+		<div><span id="sbc4">0</span></div>
+		<div>sb力量</div>
+		<div>乘数:x</div>
+		<div><span id="sbm4">1</span></div>
+		<div><button class="button" onclick="buysb(4)">购买</button></div>
+	</div>
+	<div class="dim">
+		<div>你有</div>
+		<div><span id="sbd5">0</span></div>
+		<div>第五sb维度</div>
+		<div>价格:</div>
+		<div><span id="sbc5">0</span></div>
+		<div>sb力量</div>
+		<div>乘数:x</div>
+		<div><span id="sbm5">1</span></div>
+		<div><button class="button" onclick="buysb(5)">购买</button></div>
+	</div>
+	<div class="dim">
+		<div>你有</div>
+		<div><span id="sbd6">0</span></div>
+		<div>第六sb维度</div>
+		<div>价格:</div>
+		<div><span id="sbc6">0</span></div>
+		<div>sb力量</div>
+		<div>乘数:x</div>
+		<div><span id="sbm6">1</span></div>
+		<div><button class="button" onclick="buysb(6)">购买</button></div>
+	</div>
+	<div class="dim">
+		<div>你有</div>
+		<div><span id="sbd7">0</span></div>
+		<div>第七sb维度</div>
+		<div>价格:</div>
+		<div><span id="sbc7">0</span></div>
+		<div>sb力量</div>
+		<div>乘数:x</div>
+		<div><span id="sbm7">1</span></div>
+		<div><button class="button" onclick="buysb(7)">购买</button></div>
+	</div>
+	<div class="dim">
+		<div>你有</div>
+		<div><span id="sbd8">0</span></div>
+		<div>第八sb维度</div>
+		<div>价格:</div>
+		<div><span id="sbc8">0</span></div>
+		<div>sb力量</div>
+		<div>乘数:x</div>
+		<div><span id="sbm8">1</span></div>
+		<div><button class="button" onclick="buysb(8)">购买</button></div>
+	</div>
+</div>
+
+<br>
+<div>
+	你进行了<span id="sbboost">0</span>次sb提升:
+	价格:<span id="boostcost">1e16</span>sb力量
+	<button onclick="sbboost()">进行提升</button>
+	<br>sb提升效果:所有sb维度乘数*<span id="boosteff">1</span>
+</div>
+<button onclick="nullSB()">硬重置</button>
+<script>
+let sb = n(0)
+let sbbuy = [n(0),n(0),n(0),n(0),n(0),n(0),n(0),n(0)]
+let sbnum = [n(0),n(0),n(0),n(0),n(0),n(0),n(0),n(0)]
+let sbcost = [n(10),n(100),n(1000),n(1e4),n(1e5),n(1e6),n(1e7),n(1e8)]
+let sbcostbase = [n(10),n(100),n(1000),n(1e4),n(1e5),n(1e6),n(1e7),n(1e8)]
+let sbscale = [n(100),n(10000),n(1e6),n(1e8),n(1e10),n(1e12),n(1e14),n(1e16)]
+let sbmult = [n(1),n(1),n(1),n(1),n(1),n(1),n(1),n(1)]
+let sbbase = [n(2),n(2),n(2),n(2),n(2),n(2),n(2),n(2)]
+
+let boostcost = n(1e16)
+let boostcostbase = n(1e16)
+let boostscale = n(1e10)
+let boosteff = n(1)
+let boostnum = n(0)
+let boostbase = n(2)
+function n(num){
+	return new Decimal(num)
+}
+function getSBpower(){
+	sb=sb.add(1)
+	SBupdate()
+}
+function buysb(id){
+	if(sb.gte(sbcost[id-1])){
+		sbnum[id-1] = sbnum[id-1].add(1)
+		sbbuy[id-1] = sbbuy[id-1].add(1)
+		sb = sb.sub(sbcost[id-1])
+		sbcost[id-1] = sbcostbase[id-1].mul(sbscale[id-1].pow(sbbuy[id-1]))
+		sbmult[id-1] = sbbase[id-1].pow(sbbuy[id-1]).mul(boosteff)
+
+		SBupdate()
+	}
+}
+function sbboost(){
+	if(sb.gte(boostcost)){
+		sb = n(0)
+		sbbuy = [n(0),n(0),n(0),n(0),n(0),n(0),n(0),n(0)]
+		sbnum = [n(0),n(0),n(0),n(0),n(0),n(0),n(0),n(0)]
+		sbcost = [n(10),n(100),n(1000),n(1e4),n(1e5),n(1e6),n(1e7),n(1e8)]
+		sbmult = [n(1),n(1),n(1),n(1),n(1),n(1),n(1),n(1)]
+		boostnum = boostnum.add(1)
+		boosteff = boostbase.pow(boostnum)
+		boostcost = boostcostbase.mul(boostscale.pow(boostnum))
+		SBupdate()
+	}
+}
+setInterval(() => {
+	//sb维度生产
+	let sbgain = sbnum[0].mul(sbmult[0])
+	sb = sb.add(sbgain.mul(0.05))
+	let sb1gain = sbnum[1].mul(sbmult[1])
+	sbnum[0] = sbnum[0].add(sb1gain.mul(0.05))
+	let sb2gain = sbnum[2].mul(sbmult[2])
+	sbnum[1] = sbnum[1].add(sb2gain.mul(0.05))
+	let sb3gain = sbnum[3].mul(sbmult[3])
+	sbnum[2] = sbnum[2].add(sb3gain.mul(0.05))
+	let sb4gain = sbnum[4].mul(sbmult[4])
+	sbnum[3] = sbnum[3].add(sb4gain.mul(0.05))
+	let sb5gain = sbnum[5].mul(sbmult[5])
+	sbnum[4] = sbnum[4].add(sb5gain.mul(0.05))
+	let sb6gain = sbnum[6].mul(sbmult[6])
+	sbnum[5] = sbnum[5].add(sb6gain.mul(0.05))
+	let sb7gain = sbnum[7].mul(sbmult[7])
+	sbnum[6] = sbnum[6].add(sb7gain.mul(0.05))
+	//sb维度乘数计算
+	for(let i=0;i<=7;i=i+1){
+		sbmult[i] = sbbase[i].pow(sbbuy[i]).mul(boosteff)
+	}
+	//sb提升价格和效果计算
+	boostcost = boostcostbase.mul(boostscale.pow(boostnum))
+	SBupdate()
+},50)
+setInterval(() => {
+	saveSB()
+},10000)
+/*
+setInterval(() => {
+	console.log("你这个无耻的作弊者，去死吧！")
+	console.log("傻逼玩意")
+},50)*/
+function saveSB(){
+	const sbData = {
+		sb:sb,
+		sbbuy:sbbuy,
+		sbnum:sbnum,
+		sbcost:sbcost,
+		sbcostbase:sbcostbase,
+		sbscale:sbscale,
+		sbmult:sbmult,
+		sbbase:sbbase,
+
+		boostcost:boostcost,
+		boostcostbase:boostcostbase,
+		boostscale:boostscale,
+		boosteff:boosteff,
+		boostnum:boostnum,
+		boostbase:boostbase,
+	}
+	localStorage.setItem("uhwaerdkdgabrbsdafrklsjfytg",JSON.stringify(sbData))
+	console.log("sb is fuckd!")
+}
+function nullSB(){
+	const sbData = {
+		sb:n(0),
+		sbbuy:sbcost[n(0),n(0),n(0),n(0),n(0),n(0),n(0),n(0)],
+		sbnum:[n(0),n(0),n(0),n(0),n(0),n(0),n(0),n(0)],
+		sbcost:[n(10),n(100),n(1000),n(1e4),n(1e5),n(1e6),n(1e7),n(1e8)],
+		sbcostbase:[n(10),n(100),n(1000),n(1e4),n(1e5),n(1e6),n(1e7),n(1e8)],
+		sbscale:[n(100),n(10000),n(1e6),n(1e8),n(1e10),n(1e12),n(1e14),n(1e16)],
+		sbmult:[n(1),n(1),n(1),n(1),n(1),n(1),n(1),n(1)],
+		sbbase:[n(2),n(2),n(2),n(2),n(2),n(2),n(2),n(2)],
+		boostcost:n(1e16),
+		boostcostbase:n(1e16),
+		boostscale:n("1e1000"),
+		boosteff:n(1),
+		boostnum:n(0),
+		boostbase:n(2),
+	}
+	localStorage.setItem("uhwaerdkdgabrbsdafrklsjfytg",JSON.stringify(sbData))
+	sb = n(0)
+	sbbuy = [n(0),n(0),n(0),n(0),n(0),n(0),n(0),n(0)]
+	sbnum = [n(0),n(0),n(0),n(0),n(0),n(0),n(0),n(0)]
+	sbcost = [n(10),n(100),n(1000),n(1e4),n(1e5),n(1e6),n(1e7),n(1e8)]
+	sbcostbase = [n(10),n(100),n(1000),n(1e4),n(1e5),n(1e6),n(1e7),n(1e8)]
+	sbscale = [n(100),n(10000),n(1e6),n(1e8),n(1e10),n(1e12),n(1e14),n(1e16)]
+	sbmult = [n(1),n(1),n(1),n(1),n(1),n(1),n(1),n(1)]
+	sbbase = [n(2),n(2),n(2),n(2),n(2),n(2),n(2),n(2)]
+	boostcost = n(1e16)
+	boostcostbase = n(1e16)
+	boostscale = n("1e1000")
+	boosteff = n(1)
+	boostnum = n(0)
+	boostbase = n(2)
+	console.log("sb is die!")
+}
+function fuckSB(){
+	const sbData = JSON.parse(localStorage.getItem("uhwaerdkdgabrbsdafrklsjfytg")) ?? {}
+	sb = new Decimal(sbData.sb || n(0))
+	sbbuy = sbData.sbbuy.map(currentSB => new Decimal(currentSB)) || [n(0),n(0),n(0),n(0),n(0),n(0),n(0),n(0)]
+	sbnum = sbData.sbnum.map(currentSB => new Decimal(currentSB)) || [n(0),n(0),n(0),n(0),n(0),n(0),n(0),n(0)]
+	sbcost = sbData.sbcost.map(currentSB => new Decimal(currentSB)) || [n(10),n(100),n(1000),n(1e4),n(1e5),n(1e6),n(1e7),n(1e8)]
+	sbcostbase = sbData.sbcostbase.map(currentSB => new Decimal(currentSB)) || [n(10),n(100),n(1000),n(1e4),n(1e5),n(1e6),n(1e7),n(1e8)]
+	sbscale = sbData.sbscale.map(currentSB => new Decimal(currentSB)) || [n(100),n(10000),n(1e6),n(1e8),n(1e10),n(1e12),n(1e14),n(1e16)]
+	sbmult = sbData.sbmult.map(currentSB => new Decimal(currentSB)) || [n(1),n(1),n(1),n(1),n(1),n(1),n(1),n(1)]
+	sbbase = sbData.sbbase.map(currentSB => new Decimal(currentSB)) || [n(2),n(2),n(2),n(2),n(2),n(2),n(2),n(2)]
+	boostcost = n(sbData.boostcost) || n(1e16)
+	boostcostbase = n(sbData.boostcostbase) || n(1e16)
+	boostscale = n(sbData.boostscale) || n("1e1000")
+	boosteff = n(sbData.boosteff) || n(1)
+	boostnum = n(sbData.boostnum) || n(0)
+	boostbase = n(sbData.boostbase) || n(2)
+	console.log("sb is loads!")
+}
+function SBupdate(){
+	document.getElementById('sbpower').textContent = format(sb)
+	for(let i = 1;i <= 8;i = i+1){
+		document.getElementById(`sbd${i}`).textContent = format(sbnum[i-1])
+		document.getElementById(`sbc${i}`).textContent = format(sbcost[i-1])
+		document.getElementById(`sbm${i}`).textContent = format(sbmult[i-1])
+	}
+	document.getElementById('sbboost').textContent = format(boostnum)
+	document.getElementById('boostcost').textContent = format(boostcost)
+	document.getElementById('boosteff').textContent = format(boosteff)
+}
+SBupdate()
+fuckSB()
+/*
+document.onkeydown = () => {
+        //禁用F12
+        if (window.event && window.event.keyCode == 123) {
+            return false;
+            //禁用ctrl+shift+i,
+        } else if (window.event.ctrlKey && window.event.shiftKey && window.event.keyCode == 73) {
+            return false;
+            //屏蔽Shift+F10
+        } else if (window.event.shiftKey && window.event.keyCode == 121) {
+            return false;
+        }
+    }
+	*/
+</script>
+</body>
